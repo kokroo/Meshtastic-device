@@ -25,7 +25,7 @@ void AirTime::logAirtime(reportTypes reportType, uint32_t airtime_ms)
         this->airtimes.periodRX_ALL[0] = this->airtimes.periodRX_ALL[0] + airtime_ms;
     }
 
-    // Log all airtime type for channel utilization
+    // Log all airtime type for channel utilization.
     this->channelUtilization[this->getPeriodUtilMinute()] = channelUtilization[this->getPeriodUtilMinute()] + airtime_ms;
 }
 
