@@ -18,8 +18,8 @@ class SinglePortModule : public MeshModule
     SinglePortModule(const char *_name, PortNum _ourPortNum) : MeshModule(_name), ourPortNum(_ourPortNum) {}
 
   protected:
-    uint32_t max_channel_util_percent = 40;
-    uint32_t polite_channel_util_percent = 25;
+    uint32_t max_channel_util_percent = 10000;
+    uint32_t polite_channel_util_percent = 10000;
 
     /**
      * @return true if you want to receive the specified portnum
