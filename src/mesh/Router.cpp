@@ -348,6 +348,7 @@ bool perhapsDecode(meshtastic_MeshPacket *p)
                     // LOG_DEBUG("\n\n**\n\nDecompressed length - %d \n", decompressed_len);
 
                     memcpy(p->decoded.payload.bytes, decompressed_out, decompressed_len);
+                    p->decoded.payload.size = decompressed_len;
 
                     // Switch the port from PortNum_TEXT_MESSAGE_COMPRESSED_APP to PortNum_TEXT_MESSAGE_APP
                     p->decoded.portnum = meshtastic_PortNum_TEXT_MESSAGE_APP;
@@ -371,9 +372,7 @@ meshtastic_Routing_Error perhapsEncode(meshtastic_MeshPacket *p)
 
     // If the packet is not yet encrypted, do so now
     if (p->which_payload_variant == meshtastic_MeshPacket_decoded_tag) {
-        size_t numbytes = pb_encode_to_bytes(bytes, sizeof(bytes), &meshtastic_Data_msg, &p->decoded);
-
-        // Only allow encryption on the text message app.
+        // Only allow compression on the text message app.
         //  TODO: Allow modules to opt into compression.
         if (p->decoded.portnum == meshtastic_PortNum_TEXT_MESSAGE_APP) {
 
@@ -385,8 +384,7 @@ meshtastic_Routing_Error perhapsEncode(meshtastic_MeshPacket *p)
             int compressed_len;
             compressed_len = unishox2_compress_simple(original_payload, p->decoded.payload.size, compressed_out);
 
-            LOG_DEBUG("Original length - %d \n", p->decoded.payload.size);
-            LOG_DEBUG("Compressed length - %d \n", compressed_len);
+            LOG_DEBUG("Length - %d, Compressed length - %d \n", p->decoded.payload.size, compressed_len);
             LOG_DEBUG("Original message - %s \n", p->decoded.payload.bytes);
 
             // If the compressed length is greater than or equal to the original size, don't use the compressed form
@@ -407,7 +405,7 @@ meshtastic_Routing_Error perhapsEncode(meshtastic_MeshPacket *p)
                 p->decoded.portnum = meshtastic_PortNum_TEXT_MESSAGE_COMPRESSED_APP;
             }
         }
-
+        size_t numbytes = pb_encode_to_bytes(bytes, sizeof(bytes), &meshtastic_Data_msg, &p->decoded);
         if (numbytes > MAX_RHPACKETLEN)
             return meshtastic_Routing_Error_TOO_LARGE;
 
