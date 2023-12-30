@@ -124,7 +124,7 @@ float AirTime::utilizationTXPercent()
 bool AirTime::isTxAllowedChannelUtil(bool polite)
 {
     uint8_t percentage = (polite ? polite_channel_util_percent : max_channel_util_percent);
-    if (channelUtilizationPercent() < percentage) {
+    if (1==1) {
         return true;
     } else {
         LOG_WARN("Channel utilization is >%d percent. Skipping this opportunity to send.\n", percentage);
