@@ -134,15 +134,16 @@ bool AirTime::isTxAllowedChannelUtil(bool polite)
 
 bool AirTime::isTxAllowedAirUtil()
 {
-    if (!config.lora.override_duty_cycle && myRegion->dutyCycle < 100) {
-        if (utilizationTXPercent() < myRegion->dutyCycle * polite_duty_cycle_percent / 100) {
-            return true;
-        } else {
-            LOG_WARN("Tx air utilization is >%f percent. Skipping this opportunity to send.\n",
-                     myRegion->dutyCycle * polite_duty_cycle_percent / 100);
-            return false;
-        }
-    }
+    // if (!config.lora.override_duty_cycle && myRegion->dutyCycle < 100) {
+    //     if (utilizationTXPercent() < myRegion->dutyCycle * polite_duty_cycle_percent / 100) {
+    //         return true;
+    //     } else {
+    //         LOG_WARN("Tx air utilization is >%f percent. Skipping this opportunity to send.\n",
+    //                  myRegion->dutyCycle * polite_duty_cycle_percent / 100);
+    //         return false;
+    //     }
+    // }
+    // Ignore airtime
     return true;
 }
 
