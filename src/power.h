@@ -13,10 +13,10 @@
  * looking at the red line - discharge at 0.2A - he gets a capacity of 2900mah, 90% of 2900 = 2610, that point in the graph looks
  * to be a shade above 3.2V
  */
-#define MIN_BAT_MILLIVOLTS 3250 // millivolts. 10% per https://blog.ampow.com/lipo-voltage-chart/
+#define MIN_BAT_MILLIVOLTS 3000 // millivolts. 10% per https://blog.ampow.com/lipo-voltage-chart/
 
-#define BAT_MILLIVOLTS_FULL 4100
-#define BAT_MILLIVOLTS_EMPTY 3500
+#define BAT_MILLIVOLTS_FULL 4200
+#define BAT_MILLIVOLTS_EMPTY 3000
 #ifdef BAT_MEASURE_ADC_UNIT
 extern RTC_NOINIT_ATTR uint64_t RTC_reg_b;
 #include "soc/sens_reg.h" // needed for adc pin reset

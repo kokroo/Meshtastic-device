@@ -270,7 +270,7 @@ class AnalogBatteryLevel : public HasBatteryLevel
 #define BAT_FULLVOLT 4200
 #endif
 #ifndef BAT_EMPTYVOLT
-#define BAT_EMPTYVOLT 3270
+#define BAT_EMPTYVOLT 3000
 #endif
 #ifndef BAT_CHARGINGVOLT
 #define BAT_CHARGINGVOLT 4210
